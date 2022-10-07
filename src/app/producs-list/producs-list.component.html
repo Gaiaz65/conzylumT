@@ -1,0 +1,20 @@
+<ng-container *ngIf="!isLoading; else loading">
+  <div class="producs">
+    <app-products *ngFor="let product of pageSlice | async as productlist; let i = index"[product]="product" [id]="product.id"></app-products>
+  </div>
+</ng-container>
+
+  <mat-paginator
+    [hidden]="isLoading"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageChange($event)"
+    aria-label="Select page"
+      >
+  </mat-paginator>
+
+<ng-template #loading>
+  <app-loading-spinner ></app-loading-spinner>
+</ng-template>
+

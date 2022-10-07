@@ -1,0 +1,10 @@
+ul {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+ li > a {
+  color: white;
+}
