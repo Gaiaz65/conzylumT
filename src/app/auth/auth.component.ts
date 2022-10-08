@@ -35,7 +35,9 @@ export class AuthComponent implements OnInit {
       .subscribe(
         () => {
           this.isLoading = false;
-          this.snackBar.open('You have sucessfully logged in!', 'Got it');
+          this.snackBar.open('You have sucessfully logged in!', 'Got it', {
+            duration: 2500,
+          });
         },
         (error) => {
           this.isLoading = false;

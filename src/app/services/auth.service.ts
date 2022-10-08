@@ -12,9 +12,7 @@ export interface LoginResponseData {
   expiration?: Date;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
   public isAuth = false;
 
@@ -43,7 +41,7 @@ export class AuthService {
       );
   }
 
-  handleAuthentication(userData: any) {
+  handleAuthentication(userData: object) {
     localStorage.setItem('userData', JSON.stringify(userData));
   }
 
@@ -57,7 +55,6 @@ export class AuthService {
     if (this.router.url === '/auth') {
       this.router.navigate(['/products']);
     }
-
     this.isAuth = true;
   }
 

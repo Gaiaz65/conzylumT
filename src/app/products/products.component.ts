@@ -68,8 +68,10 @@ export class ProductsComponent implements OnInit {
     let endIndex = startIndex + event.pageSize;
     if (endIndex > this.products.length) {
       this.loadMoreProducts(event, startIndex, endIndex);
+      return;
     }
     this.pageSlice = of(this.products.slice(startIndex, endIndex));
+    window.scrollTo(0,0);
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
