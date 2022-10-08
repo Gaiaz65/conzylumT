@@ -19,10 +19,10 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap:1rem;
+        gap: 1rem;
       }
       h2 {
-        color: white
+        color: white;
       }
     `,
   ],

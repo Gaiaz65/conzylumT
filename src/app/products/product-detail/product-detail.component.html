@@ -1,0 +1,36 @@
+<ng-container *ngIf="!isLoading; else loading">
+  <mat-card>
+    <mat-card-content class="content-image">
+      <ngb-carousel>
+        <ng-template ngbSlide *ngFor="let images of product.images; let i = index">
+          <a class="picsum-img-wrapper img" target="_blank" [href]="product.images[i]" matTooltip="click to zoom in">
+            <img src={{product.images[i]}} alt="src/assets/images/no-image.jpg">
+          </a>
+        </ng-template>
+      </ngb-carousel>
+
+    </mat-card-content>
+    <mat-card-content>
+      <mat-card-title>{{product.title}}</mat-card-title>
+      <mat-card-subtitle>{{product.category | titlecase}}/{{product.brand}} </mat-card-subtitle>
+      <hr>
+      <h4>Description:<p>{{product.description}}</p>
+      </h4>
+      <h3>Price:<strong>{{product.price | currency:'USD'}}</strong> </h3>
+      <h3>Rating: <app-star-rating [rating]="product.rating"></app-star-rating>
+      </h3>
+      <h3>
+        Discount:
+        <strong>{{product.discountPercentage}}%</strong>
+      </h3>
+      <h3>Left in stock: <strong>{{product.stock}}</strong></h3>
+      <mat-card-actions><button mat-raised-button color="primary" routerLink="/products">Back to menu</button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>

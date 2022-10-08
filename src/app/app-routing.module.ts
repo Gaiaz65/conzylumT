@@ -1,20 +1,24 @@
-import { AuthComponent } from './auth/auth.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductDetailComponent } from './producs-list/products/product-detail/product-detail.component';
-import { ProducsListComponent } from './producs-list/producs-list.component';
+
+import { AuthComponent } from './auth/auth.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductsComponent } from './products/products.component';
+
 import { AuthGuard } from './services/auth.guard';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/list', pathMatch: 'full' },
   {
     path: 'products',
-    component: ProducsListComponent,
+    component: ProductsComponent,
     canActivate: [AuthGuard],
   },
 
-  { path: 'product-detail/:id', component: ProductDetailComponent},
-
+  {
+    path: 'product-detail/:id',
+    component: ProductDetailComponent,
+    canActivate: [AuthGuard],
+  },
 
   { path: 'auth', component: AuthComponent },
 ];

@@ -1,8 +1,9 @@
-import { AuthData } from '../models/response-data.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
+
+import { AuthData } from '../models/response-data.model';
 
 export interface LoginResponseData {
   username?: string;
@@ -19,40 +20,44 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-
   login(authData: AuthData) {
-    const userData$ = new Observable((observer) => {
-      fetch('https://dummyjson.com/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: authData.username,
-          password: authData.password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          observer.next(data);
+    const body = JSON.stringify({
+      username: authData.username,
+      password: authData.password,
+    });
+
+    const httpHeaders = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+
+    return this.http
+      .post('https://dummyjson.com/auth/login', body, httpHeaders)
+      .pipe(
+        map((userToken) => {
           this.isAuth = true;
           this.router.navigate(['/products']);
-          observer.complete();
+          this.handleAuthentication(userToken);
         })
-        .catch((err) => observer.error(err));
-    });
-    return userData$;
+      );
   }
 
   handleAuthentication(userData: any) {
-   localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('userData', JSON.stringify(userData));
   }
 
   autoLogin() {
-    const currentUser = localStorage.getItem('userData')
+    const currentUser = localStorage.getItem('userData');
 
     if (!currentUser) {
       return;
     }
-    this.router.navigate(['/products']);
+
+    if (this.router.url === '/auth') {
+      this.router.navigate(['/products']);
+    }
+
     this.isAuth = true;
   }
 
@@ -65,4 +70,3 @@ export class AuthService {
     return localStorage.getItem('userData');
   }
 }
-

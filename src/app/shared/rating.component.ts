@@ -8,7 +8,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
     class="star"
     [rate]="rating"
     #tooltip="matTooltip"
-    matTooltip="{{ rating + '/5'}}"
+    matTooltip="{{ rating + '/5' }}"
   ></ngb-rating>`,
   styles: [
     `

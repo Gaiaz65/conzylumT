@@ -1,7 +1,7 @@
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
-import { throws } from 'assert';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-auth',
@@ -12,26 +12,32 @@ export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading = false;
 
-  constructor(private authServise: AuthService) {}
+  constructor(
+    private authServise: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this.authServise.autoLogin()
+    this.authServise.autoLogin();
   }
 
   onSubmit(loginForm: NgForm) {
-     this.isLoading = true;
+    this.isLoading = true;
+    const username = loginForm.value.username;
+    const password = loginForm.value.password;
+
     this.authServise
       .login({
-        username: 'kminchelle',
-        password: '0lelplR',
+        username: username,
+        password: password,
       })
-      .subscribe((res) => {
-        this.authServise.handleAuthentication(res);
-
+      .subscribe(() => {
         this.isLoading = false;
+        this.snackBar.open('You have sucessfully logged in!', 'Got it');
+      },
+      error => {
+        this.isLoading = false;
+        this.snackBar.open(error.error.message, 'Try Again');
       });
   }
 }
-
-// username: this.loginForm.value.email,
-// password: this.loginForm.value.password,

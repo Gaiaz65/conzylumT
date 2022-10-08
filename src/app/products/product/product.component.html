@@ -1,0 +1,17 @@
+<a [routerLink]="'../product-detail/'+[id]">
+  <mat-card>
+    <mat-card-content>
+      <img mat-card-image src="{{product.thumbnail}}" alt="src/assets/images/no-image.jpg">
+    </mat-card-content>
+    <mat-card-content>
+      <h2>{{product.title | titleShort | titlecase }}</h2>
+      <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+      <p>{{product.description | descriptionShort | titlecase}}</p>
+      <h3><strong>{{product.price | currency:'USD'}}</strong><small>{{product.discountPercentage}}%</small></h3>
+      <h3>
+        <strong>Rating:</strong>
+        <app-star-rating [rating]="product.rating"></app-star-rating>
+      </h3>
+    </mat-card-content>
+  </mat-card>
+</a>

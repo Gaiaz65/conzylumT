@@ -4,18 +4,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
+  constructor(public auth: AuthService) {}
 
-  constructor(public auth: AuthService) {
+  ngOnInit(): void {}
+
+  onLogout() {
+    this.auth.logOut();
   }
-
-  ngOnInit(): void {
-  }
-
-  onLogout(){
-    this.auth.logOut()
-  }
-
 }

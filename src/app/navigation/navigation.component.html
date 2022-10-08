@@ -2,8 +2,8 @@
   <button mat-icon-button routerLink="/products">
     <mat-icon>home</mat-icon>
   </button>
-    <ul>
-      <li *ngIf="!auth.isAuth"><a>Login</a></li>
-      <li *ngIf="auth.isAuth"><a (click)="onLogout()" routerLink="/auth">LogOut</a></li>
-    </ul>
+  <ul>
+    <li *ngIf="!auth.isAuth"><a routerLink="/auth">Login</a></li>
+    <li *ngIf="auth.isAuth"><a (click)="onLogout()" routerLink="/auth">LogOut</a></li>
+  </ul>
 </mat-toolbar>

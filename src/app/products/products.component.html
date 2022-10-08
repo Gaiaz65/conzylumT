@@ -1,6 +1,6 @@
 <ng-container *ngIf="!isLoading; else loading">
   <div class="producs">
-    <app-products *ngFor="let product of pageSlice | async as productlist; let i = index"[product]="product" [id]="product.id"></app-products>
+    <app-product *ngFor="let product of pageSlice | async as productlist; let i = index"[product]="product" [id]="product.id"></app-product>
   </div>
 </ng-container>
 

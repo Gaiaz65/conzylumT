@@ -1,0 +1,47 @@
+mat-card {
+  width: 18rem;
+  height: 28rem;
+  box-shadow: 10px 10px 3px black;
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+    box-shadow: 20px 10px 40px black;
+    transform: scale(1.05);
+    z-index: 10;
+  }
+}
+
+mat-card-content {
+  flex: 1;
+  height: 50%;
+  position: relative;
+
+  &>img {
+    height: 14rem;
+    width: 18rem;
+    object-fit: scale-down;
+    border: 1px solid rgba(128, 128, 128, 0.36);
+    border-radius: 5px;
+  }
+}
+
+
+h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+small {
+  color: red;
+  text-decoration: line-through;
+}
+
+mat-spinner {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
