@@ -14,7 +14,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
     `
       .star {
         font-size: 1rem;
-        color: gold;
+        color: #673ab7;
       }
     `,
   ],

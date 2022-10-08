@@ -10,8 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private auth: AuthService) {}
   ngOnInit() {
       this.auth.autoLogin();
-
-
   }
   title = 'conzylum';
 }

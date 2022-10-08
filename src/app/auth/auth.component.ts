@@ -1,7 +1,8 @@
-import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { AuthService } from './../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -31,13 +32,15 @@ export class AuthComponent implements OnInit {
         username: username,
         password: password,
       })
-      .subscribe(() => {
-        this.isLoading = false;
-        this.snackBar.open('You have sucessfully logged in!', 'Got it');
-      },
-      error => {
-        this.isLoading = false;
-        this.snackBar.open(error.error.message, 'Try Again');
-      });
+      .subscribe(
+        () => {
+          this.isLoading = false;
+          this.snackBar.open('You have sucessfully logged in!', 'Got it');
+        },
+        (error) => {
+          this.isLoading = false;
+          this.snackBar.open(error.error.message, 'Try Again');
+        }
+      );
   }
 }

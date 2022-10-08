@@ -11,6 +11,4 @@ import { Product } from 'src/app/models/product.model';
 export class ProductComponent {
   @Input() product!: Product;
   @Input() id!: number;
-
-  constructor() {}
 }
