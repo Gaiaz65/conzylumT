@@ -1,6 +1,23 @@
 # Conzylum
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+Test taks:
+
+Create an Angular application with Material design.
+
+Acceptance criteria:
+
+- User should be able to login
+- User should be able to logout
+- User should be able to see available products
+- User should be able to see product details by clicking on the product in the list
+
+API:
+
+- https://dummyjson.com/auth/login - Login endpoint. Credentials: username: 'kminchelle', password: '0lelplR'
+- https://dummyjson.com/auth/users/ID - Fetch user
+- https://dummyjson.com/auth/products - Fetch products
+- https://dummyjson.com/auth/products/ID - Fetch concrete product
+
 
 ## Development server
 
@@ -25,3 +42,5 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
