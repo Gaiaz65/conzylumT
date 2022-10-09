@@ -1,6 +1,8 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { OnDestroy } from '@angular/core';
 
 import { AuthService } from './../services/auth.service';
 
@@ -9,7 +11,8 @@ import { AuthService } from './../services/auth.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit,OnDestroy {
+  authSub?:Subscription;
   loginForm!: FormGroup;
   isLoading = false;
 
@@ -18,7 +21,7 @@ export class AuthComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.authServise.autoLogin();
   }
 
@@ -44,5 +47,12 @@ export class AuthComponent implements OnInit {
           this.snackBar.open(error.error.message, 'Try Again');
         }
       );
+  }
+
+  ngOnDestroy() {
+    if (!this.authSub) {
+      return
+    }
+    this.authSub.unsubscribe()
   }
 }

@@ -1,9 +1,10 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Product } from 'src/app/models/product.model';
+import { Subscription } from 'rxjs';
 
+import { Product } from 'src/app/models/product.model';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { ProductsService } from '../../services/products.service';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
+  pSubscription!: Subscription;
   product!: Product;
   id!: number;
   isLoading = false;
@@ -27,7 +29,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.route.params.subscribe((params: Params) => {
+    this.pSubscription = this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.productsServie.getSpecificProduct(this.id).subscribe(
         (product) => {
@@ -42,5 +44,9 @@ export class ProductDetailComponent implements OnInit {
         }
       );
     });
+  }
+
+  ngOnDestroy() {
+    this.pSubscription.unsubscribe();
   }
 }
